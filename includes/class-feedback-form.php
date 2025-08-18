@@ -1,8 +1,14 @@
-<?php
+<?php   
 add_shortcode( 'insight_suite', 'callback_insight_suite');
 
 function callback_insight_suite()
 {
+
+    require_once plugin_dir_path(__FILE__) . 'class-enqueue-css.php';
+    
+    require_once plugin_dir_path(__FILE__) . 'class-enqueue-js.php';
+
+
     ob_start();//Using this as a good practice. It means it turns on a bucket to catch the output.
     $file_path = require_once plugin_dir_path(__FILE__) . '../templates/feedback-form.php';
     if (file_exists($file_path)) {
