@@ -1,4 +1,4 @@
-<form class="feedback-form">
+<form class="feedback-form" method="post">
 
     <div class="div-name">
         <label for="name">Name</label><br>
