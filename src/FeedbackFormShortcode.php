@@ -1,13 +1,15 @@
 <?php
 
+namespace InsightSuite;
+
 defined('ABSPATH') || exit;
 
 //Comments are added by the author himself to help other developers or learners.
 
 
-class Insight_Suite_Feedback_Form {
+class FeedbackFormShortcode {
 
-    const SHORTCODE = 'insight_suite';
+    const SHORTCODE = 'insight_feedback_form';
 
     //This is a constructor that will be called when the object of this class will be created.
     public function __construct() {

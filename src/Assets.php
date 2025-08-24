@@ -1,8 +1,10 @@
 <?php
 
+namespace InsightSuite;
+
 defined('ABSPATH') || exit;
 
-class Insight_Suite_Assets {
+class Assets {
 
     public function __construct() {
         
@@ -13,8 +15,8 @@ class Insight_Suite_Assets {
     function enqueue_frontend_css() {
 
         wp_enqueue_style(
-            'ip_frontend_css',
-            plugin_dir_url(__FILE__) . '../assets/css/public.css',
+            'wpis_frontend_css',
+            WPIS_URL . 'assets/css/public.css',
             array(),
             WPIS_VERSION,
             'all'
@@ -22,9 +24,10 @@ class Insight_Suite_Assets {
     }
 
     function enqueue_frontend_js() {
+        
         wp_enqueue_script(
-            'ip_frontend_js',
-            plugin_dir_url(__FILE__) . '../assets/js/public-widget.js',
+            'wpis_frontend_js',
+            WPIS_URL . 'assets/js/public-widget.js',
             array(),
             WPIS_VERSION,
             true

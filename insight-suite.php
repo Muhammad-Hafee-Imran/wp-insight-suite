@@ -12,17 +12,9 @@ define('WPIS_VERSION','0.1.0');//These are constants. Name and value.
 define('WPIS_PATH', plugin_dir_path(__FILE__));
 define('WPIS_URL', plugin_dir_url(__FILE__));
 
-
-//Only here for some time till I switch to the Composer autoload.
-require_once WPIS_PATH . 'includes/class-feedback-form-shortcode.php';
-
-add_action('plugins_loaded', function () {
-    new Insight_Suite_Feedback_Form();
-});
-
-
-require_once plugin_dir_path(__FILE__) . 'includes/class-insight-suite-assets.php';
+require_once WPIS_PATH . 'vendor/autoload.php';
 
 add_action('plugins_loaded', function() {
-    new Insight_Suite_Assets();
-} );
+    new InsightSuite\InsightSuite();
+});
+

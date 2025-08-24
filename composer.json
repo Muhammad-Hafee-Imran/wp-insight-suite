@@ -1,0 +1,17 @@
+{
+    "name": "muhammad-hafee-imran/insight-suite",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "autoload": {
+        "psr-4": {
+            "InsightSuite\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Muhammad Hafee Imran",
+            "email": "mhafee.imran@gmail.com"
+        }
+    ],
+    "require": {}
+}
