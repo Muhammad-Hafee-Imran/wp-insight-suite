@@ -1,6 +1,6 @@
 <?php
 
-namespace InsightSuite;
+namespace HafeeImran\WPInsightSuite;
 
 defined('ABSPATH') || exit;
 

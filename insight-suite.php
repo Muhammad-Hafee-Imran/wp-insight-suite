@@ -15,6 +15,6 @@ define('WPIS_URL', plugin_dir_url(__FILE__));
 require_once WPIS_PATH . 'vendor/autoload.php';
 
 add_action('plugins_loaded', function() {
-    new InsightSuite\InsightSuite();
+    new HafeeImran\WPInsightSuite\InsightSuite();
 });
 
