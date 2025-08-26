@@ -19,7 +19,7 @@ class FeedbackFormShortcode {
 
     }
 
-    function register_shortcode() {
+    public function register_shortcode() {
 
         //The class scope resolution self:: is used beacuse we are using the class constant static variable declared in this class. self ensures we reference this class's constant.
         add_shortcode( self::SHORTCODE, [$this, 'render'] );
@@ -45,7 +45,7 @@ class FeedbackFormShortcode {
             include $template;
         } else {
 
-            echo '<div class="notice notice-error">Insight Suite: Feedback template missing. </div> ';
+            echo '<div class="notice notice-error"> <p>' . esc_html__("Insight Suite: Feedback template missing.") . '</p></div> ';
         }
 
         return ob_get_clean();

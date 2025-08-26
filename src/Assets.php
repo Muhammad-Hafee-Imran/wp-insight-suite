@@ -12,7 +12,7 @@ class Assets {
         add_action('wp_enqueue_scripts', [$this, 'enqueue_frontend_js']);
     }
 
-    function enqueue_frontend_css() {
+    public function enqueue_frontend_css() {
 
         wp_enqueue_style(
             'wpis_frontend_css',
@@ -23,14 +23,24 @@ class Assets {
         );
     }
 
-    function enqueue_frontend_js() {
+    public function enqueue_frontend_js() {
         
         wp_enqueue_script(
             'wpis_frontend_js',
-            WPIS_URL . 'assets/js/public-widget.js',
+            WPIS_URL . 'assets/js/feedback.js',
             array(),
             WPIS_VERSION,
             true
         );
+
+        wp_localize_script(
+            'wpis_frontend_js',
+            'myPluginData',
+            array(
+                'nonce' => wp_create_nonce('insight_suite'),
+                'restUrl' => rest_url('ipff/v1/feedback'),
+            )
+        );
+
     }
 }
