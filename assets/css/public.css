@@ -93,12 +93,18 @@
     transition-duration: 0.4s;
 }
 
-.submit-btn:hover {
+.submit-btn:enabled:hover {
     cursor: pointer;
     color: white;
     background-color: rgb(127, 164, 198);
 
 
+}
+
+.submit-btn:disabled,
+.submit-btn:disabled:hover {
+    background: gray;
+    cursor: not-allowed;
 }
 
 .error-message {

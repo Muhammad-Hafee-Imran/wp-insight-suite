@@ -4,11 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let selectedRating = "neutral";
 
-    emojiBtns.forEach(btn => {
-        if (btn.dataset.rating == "neutral") {
-            btn.classList.add("selected");
-        }
-    });
+    document.querySelector('.emoji-btn[data-rating="neutral"]').classList.add("selected");
 
     emojiBtns.forEach(btn => {
         btn.addEventListener("click", (event) => {
@@ -24,67 +20,99 @@ document.addEventListener("DOMContentLoaded", () => {
     })
 
     //Input fields.
-    let inputName = document.getElementById("inputName");
-    let inputEmail = document.getElementById("inputEmail");
-    let inputFeedback = document.getElementById("feedbackTextarea");
+    const inputName = document.getElementById("inputName");
+    const inputEmail = document.getElementById("inputEmail");
+    const inputFeedback = document.getElementById("feedbackTextarea");
     //Spans.
-    let emailError = document.getElementById("emailError");
-    let feedbackError = document.getElementById("feedbackTextareaError");
-    let nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const feedbackError = document.getElementById("feedbackTextareaError");
+    const nameError = document.getElementById("nameError");
 
+    
 
-
-    document.getElementById("submitBtn").addEventListener("click", (event) => {
-
-        event.preventDefault();
-
+    function validateName()
+    {
         if (inputName.value.trim() === "") {
-            nameError.textContent = "This field is required."
-
-            inputName.addEventListener("input", () => {
-                if (inputName.value.trim() != "") {
-                    nameError.textContent = "";
-                }
-            })
+            nameError.textContent = "This field is required.";
+            return false;
         }
+        nameError.textContent = "";
+        return true; 
+        
+    }
 
-        if (inputEmail.value.trim() === "") {
+    function validateEmail() {
+        if (inputEmail.value.trim() === "" ) {
             emailError.textContent = "This field is required.";
-            inputEmail.addEventListener("input", () => {
-                if (inputEmail.value.trim() !== "") {
-                    emailError.textContent = "";
-                }
-            });
-        } else if (!inputEmail.checkValidity()) {
-            emailError.textContent = "Email format is incorrect.";
-            inputEmail.addEventListener("input", () => {
-                if (inputEmail.checkValidity()) {
-                    emailError.textContent = "";
-                }
-            });
+            return false;
+        }
+        if (inputEmail.checkValidity()) {
+            emailError.textContent = "";
+            return true;
         } else {
-            emailError.textContent = ""; 
+            emailError.textContent = "Email format is incorrect.";
+            return false;
         }
+    }
 
-
-        if (inputFeedback.value.trim() === "") {
-            feedbackError.textContent = "Feedback field is required.";
-            inputFeedback.addEventListener("input", () => {
-                if (inputFeedback.value.trim() != "") {
-                    feedbackError.textContent = "";
-                }
-
-            })
+    function validateFeedback() {
+        if (inputFeedback.value.trim() === "" ) {
+            feedbackError.textContent = "You did not give the feedback.";
+            return false;
         }
+        feedbackError.textContent = "";
+        return true;
+    }
 
-
-        if (inputName.value.trim() !== "" && inputFeedback.value.trim() !== "" && inputEmail.checkValidity()) {
-        //fetch code here
+    function validateForm() {
+    const isValid = validateEmail() && validateFeedback() && validateName();
+    const submitBtn = document.getElementById("submitBtn");
+    if (isValid) {
+        submitBtn.classList.add("enabled");
+        submitBtn.disabled = false;
+    } else {
+        submitBtn.classList.remove("enabled");
+        submitBtn.disabled = true;
+    }
     }
 
 
-    });
+    inputName.addEventListener("input" , validateName, validateForm);
+    inputEmail.addEventListener("input" , validateEmail, validateForm);
+    inputFeedback.addEventListener("input", validateFeedback, validateForm);
 
+
+    
+
+    document.getElementById("insight_suite_feedback_form").addEventListener("submit", submitFeedback);
+
+    function submitFeedback(event) {
+        event.preventDefault();
+
+        const userName = inputName.value;
+        const userEmail = inputEmail.value;
+        const userFeedback = inputFeedback.value;
+        const userRating = selectedRating;
+
+        
+        fetch(myPluginData.restUrl, {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json',
+                'X-WP-Nonce': myPluginData.nonce
+            },
+            body: JSON.stringify ({
+                name: userName,
+                email: userEmail,
+                feedback: userFeedback,
+                type: userRating,
+            })
+        } )
+
+
+
+
+    }
     
 
 

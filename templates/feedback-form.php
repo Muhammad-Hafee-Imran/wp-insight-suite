@@ -1,4 +1,4 @@
-<form class="feedback-form" method="post">
+<form id="insight_suite_feedback_form" class="feedback-form" method="post">
 
     <div class="div-name">
         <label for="name">Name</label><br>
@@ -22,33 +22,33 @@
     <div id="emoji-feedback" class="emoji-feedback">
 
         <div class="div-emoji-btn">
-            <button class="emoji-btn" data-rating="worst">😡</button><br>
+            <button type="button" class="emoji-btn" data-rating="worst">😡</button><br>
             <span class="emoji-btn-label">Worst</span>
         </div>
 
         <div class="div-emoji-btn">
-            <button class="emoji-btn" data-rating="poor">😞</button><br>
+            <button type="button" class="emoji-btn" data-rating="poor">😞</button><br>
             <span class="emoji-btn-label">Poor</span>
         </div>
 
         <div class="div-emoji-btn">
-            <button class="emoji-btn" data-rating="neutral">😐</button><br>
+            <button type="button" class="emoji-btn" data-rating="neutral">😐</button><br>
             <span class="emoji-btn-label">Neutral</span>
         </div>
 
         <div class="div-emoji-btn">
-            <button class="emoji-btn" data-rating="good">🙂</button><br>
+            <button type="button" class="emoji-btn" data-rating="good">🙂</button><br>
             <span class="emoji-btn-label">Good</span>
         </div>
 
         <div class="div-emoji-btn">
-            <button class="emoji-btn" data-rating="excellent">😃</button><br>
+            <button type="button" class="emoji-btn" data-rating="excellent">😃</button><br>
             <span class="emoji-btn-label">Excellent</span>
         </div>
 
     </div>
 
     <div class="div-submit-btn">
-        <button id="submitBtn" class="submit-btn" type="submit">Submit</button>
+        <button id="submitBtn" class="submit-btn" type="submit" disabled >Submit</button>
     </div>
 </form>
