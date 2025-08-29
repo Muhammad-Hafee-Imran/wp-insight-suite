@@ -1,14 +1,14 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    const emojiBtns = document.querySelectorAll(".emoji-btn");
+    
 
     let selectedRating = "neutral";
-
+    
     document.querySelector('.emoji-btn[data-rating="neutral"]').classList.add("selected");
 
+    const emojiBtns = document.querySelectorAll(".emoji-btn");
     emojiBtns.forEach(btn => {
-        btn.addEventListener("click", (event) => {
-            event.preventDefault();
+        btn.addEventListener("click", () => {
             emojiBtns.forEach(mybtn => {
                 if (mybtn.classList.contains("selected")) {
                     mybtn.classList.remove("selected");
@@ -32,6 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function validateName()
     {
+        
         if (inputName.value.trim() === "") {
             nameError.textContent = "This field is required.";
             return false;
@@ -77,11 +78,17 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-    inputName.addEventListener("input" , validateName, validateForm);
-    inputEmail.addEventListener("input" , validateEmail, validateForm);
-    inputFeedback.addEventListener("input", validateFeedback, validateForm);
+    inputName.addEventListener("input" , () => {validateName, validateForm});
+    inputEmail.addEventListener("input" , () => {validateEmail, validateForm});
+    inputFeedback.addEventListener("input", () => {validateFeedback, validateForm});
 
+    document.getElementById("submitBtn2").addEventListener("click", ()=>{
+         
+        document.getElementById("feedbackMsg").style.display = "block";
 
+    })
+
+   
     
 
     document.getElementById("insight_suite_feedback_form").addEventListener("submit", submitFeedback);
@@ -93,8 +100,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const userEmail = inputEmail.value;
         const userFeedback = inputFeedback.value;
         const userRating = selectedRating;
-
-        
+    
         fetch(myPluginData.restUrl, {
             method: 'POST',
             headers: {
@@ -108,17 +114,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 type: userRating,
             })
         } )
-
-
-
-
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Server error:" + response.status);
+            }
+            return response.json(); 
+        })
+        .then(data =>{
+            inputName.value = "";
+            inputEmail.value = "";
+            inputFeedback.value = "";
+            document.querySelector('.emoji-btn.selected').classList.remove("selected");
+            document.querySelector('.emoji-btn[data-rating="neutral"]').classList.add("selected");
+            setInterval(()=>{
+                 document.getElementById("feedbackMsg").style.display = "block";
+            },5000)
+        })
+        .catch(error =>{
+            console.error("Caught error: ", error );
+            alert("Something went wrong." + error.message)
+        })
     }
-    
-
-
-
-
-
-
-
 })

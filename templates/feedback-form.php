@@ -51,4 +51,7 @@
     <div class="div-submit-btn">
         <button id="submitBtn" class="submit-btn" type="submit" disabled >Submit</button>
     </div>
+    <span id="feedbackMsg" class="feedback-message">Feedback Submitted.</span>
+
+    <button id="submitBtn2" class="submit-btn2" type="button"  >Submit</button>
 </form>

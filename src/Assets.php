@@ -11,7 +11,7 @@ class Assets {
         add_action( 'wp_enqueue_scripts', [ $this, 'enqueue_frontend_css']);
         add_action('wp_enqueue_scripts', [$this, 'enqueue_frontend_js']);
     }
-
+    
     public function enqueue_frontend_css() {
 
         wp_enqueue_style(
