@@ -4,7 +4,9 @@
     "license": "GPL-2.0-or-later",
     "autoload": {
         "psr-4": {
-            "HafeeImran\\WPInsightSuite\\": "src/"
+            "HafeeImran\\WPInsightSuite\\": "src/",
+            "HafeeImran\\WPInsightSuite\\Rest\\": "src/Rest/",
+            "HafeeImran\\WPInsightSuite\\Database\\": "src/Database/"
         }
     },
     "authors": [
