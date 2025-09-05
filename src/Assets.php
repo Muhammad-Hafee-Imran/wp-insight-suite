@@ -38,7 +38,7 @@ class Assets {
             'myPluginData',
             array(
                 'nonce' => wp_create_nonce('insight_suite'),
-                'restUrl' => rest_url('ipff/v1/feedback'),
+                'restUrl' => rest_url('insight-suite/v1/feedback'),
             )
         );
 

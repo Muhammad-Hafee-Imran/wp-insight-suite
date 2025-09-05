@@ -2,6 +2,8 @@
 
 namespace HafeeImran\WPInsightSuite;
 
+use HafeeImran\WPInsightSuite\Rest\FeedbackEndpoint;
+
 defined('ABSPATH') || exit;
 
 class InsightSuite {
@@ -14,6 +16,7 @@ class InsightSuite {
 
         new FeedbackFormShortcode();
         new Assets();
+        new FeedbackEndpoint();
 
     }
 

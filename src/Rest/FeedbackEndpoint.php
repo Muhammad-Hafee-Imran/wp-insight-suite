@@ -2,92 +2,97 @@
 
 namespace HafeeImran\WPInsightSuite\Rest;
 
+use HafeeImran\WPInsightSuite\Database\FeedbackRepository;
 use WP_Error;
 use WP_REST_Request;
 use WP_REST_Response;
 
-class FeedbackEndpoint {
+class FeedbackEndpoint
+{
 
     public function __construct()
-    {   
+    {
         $this->init_hooks();
     }
 
-    public function init_hooks() {
-        add_action('rest_api_init', [$this, 'register_routes'] );
+    public function init_hooks()
+    {
+        add_action('rest_api_init', [$this, 'register_routes']);
     }
 
-    public function register_routes() {
+    public function register_routes()
+    {
         register_rest_route(
-            'ipff/v1',
+            'insight-suite/v1',
             '/feedback',
             array(
                 'methods' => 'POST',
-                'callback' => [$this,'handle_feedback_submission'],
-                'permission_callback' => [$this, 'feedback_permission_check'],
+                'callback' => [$this, 'handleFeedbackSubmission'],
+                'permission_callback' => [$this, 'feedbackPermissionCheck'],
             ),
         );
     }
 
-    public function feedback_permission_check(WP_REST_Request $request) {
+    public function feedbackPermissionCheck(WP_REST_Request $request)
+    {
         $nonce = $request->get_header('X-WP-Nonce');
         if (wp_verify_nonce($nonce, 'insight_suite')) {
             return true;
         }
-        return new WP_Error('invalid_nonce' , 'Invalid Nonce' , array('status' => 403));
+        return new WP_Error('invalid_nonce', 'Invalid Nonce', array('status' => 403));
     }
 
-    public function handle_feedback_submission(WP_REST_Request $request) {
+    public function handleFeedbackSubmission(WP_REST_Request $request)
+    {
 
         $data = $request->get_json_params();
 
         if (!isset($data['name']) || empty($data['name'])) {
-            return new WP_Error( 'empty_name', 'Empty Name', array('status' => 400) );
+            return new WP_Error('empty_name', 'Empty Name', array('status' => 400));
         } else {
             $name = sanitize_text_field($data['name']);
         }
 
         if (!isset($data['email']) || empty($data['email'])) {
-            return new WP_Error( 'empty_email', 'Empty Email', array('status' => 400) );
+            return new WP_Error('empty_email', 'Empty Email', array('status' => 400));
         } else {
-            $email = sanitize_text_field($data['email']);
+            $email = sanitize_email($data['email']);
+
+            if (empty($email)) {
+                return new WP_Error('invalid_email', 'Invalid Email', ['status' => 400]);
+            }
         }
 
         if (!isset($data['feedback']) || empty($data['feedback'])) {
-            return new WP_Error( 'empty_feedback', 'Empty Feedback', array('status' => 400) );
+            return new WP_Error('empty_feedback', 'Empty Feedback', array('status' => 400));
         } else {
-            $feedback = sanitize_text_field($data['feedback']);
+            $feedback = sanitize_textarea_field($data['feedback']);
         }
 
         if (!isset($data['type']) || empty($data['type'])) {
-            return new WP_Error( 'empty_type', 'Empty Type', array('status' => 400) );
+            return new WP_Error('empty_type', 'Empty Type', array('status' => 400));
         } else {
             $type = sanitize_text_field($data['type']);
         }
 
-        global $wpdb;
+        $repository =  new FeedbackRepository();
 
-        $table_name = $wpdb->prefix . 'insight_suite_feedback';
+        $result = $repository->insertFeedback($name, $email, $feedback, $type);
 
-        $wpdb->insert (
-            $table_name,
-            array(
-                'name' => $name,
-                'email' => $email,
-                'feedback_message' => $feedback,
-                'type' => $type,
-                'created_at' => current_time('mysql'),
-            )
-        );
+        if ($result['success'] === false) {
+            return new WP_Error(
+                'db_insert_error',
+                'DB Insertion Failed: ' . $result['error'],
+                array('status' => 500)
+            );
+        }
 
-        $response = new WP_REST_Response([
-            'success' => true,
-            'message' => 'Feedback received successfully.'
-        ], 200);
 
-        return $response;
-
-        
-
+        return new WP_REST_Response([
+            'success' => $result['success'],
+            'message' => 'Feedback received successfully.',
+            'feedback_id' => $result['insert_id'],
+        ],201);
     }
+
 }

@@ -2,21 +2,18 @@
 
     <div class="div-name">
         <label for="name">Name</label><br>
-        <input  id="inputName" class="input-name" type="text" id="name" placeholder="Name"><br>
-        <span class="error-message" id="nameError"></span>
+        <input  id="inputName" class="input-name" type="text" placeholder="Name" required><br>
     </div>
 
 
     <div class="div-email">
         <label for="email">Email</label><br>
-        <input class="input-email" id="inputEmail" type="email" id="email" placeholder="Email"><br>
-        <span class="error-message" id="emailError"></span>
+        <input class="input-email" id="inputEmail" type="email" id="email" placeholder="Email" required><br>
     </div>
 
     <div class="div-textarea">
         <label for="feedback">Feedback</label><br>
-        <textarea id="feedbackTextarea" class="feedback-textarea" id="feedback" rows="5" placeholder="Write your feedback."></textarea><br>
-        <span class="error-message" id="feedbackTextareaError"></span>
+        <textarea id="feedbackTextarea" class="feedback-textarea" id="feedback" rows="5" placeholder="Write your feedback." required></textarea><br>
     </div>
 
     <div id="emoji-feedback" class="emoji-feedback">
@@ -52,6 +49,4 @@
         <button id="submitBtn" class="submit-btn" type="submit" disabled >Submit</button>
     </div>
     <span id="feedbackMsg" class="feedback-message">Feedback Submitted.</span>
-
-    <button id="submitBtn2" class="submit-btn2" type="button"  >Submit</button>
 </form>

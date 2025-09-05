@@ -9,11 +9,10 @@
 
 use HafeeImran\WPInsightSuite\Database\FeedbackTable;
 use HafeeImran\WPInsightSuite\InsightSuite;
-use HafeeImran\WPInsightSuite\Rest\FeedbackEndpoint;
 
 defined('ABSPATH') || exit;
 
-define('WPIS_VERSION','0.1.0');
+define('WPIS_VERSION','0.1.0');//See its purpose and benefits.
 define('WPIS_PATH', plugin_dir_path(__FILE__));
 define('WPIS_URL', plugin_dir_url(__FILE__));
 

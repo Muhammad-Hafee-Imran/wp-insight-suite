@@ -1,6 +1,9 @@
 <?php
 
+
+
 namespace HafeeImran\WPInsightSuite\Database;
+defined('ABSPATH') || exit;
 
 class FeedbackTable {
     public function __construct()
@@ -13,7 +16,7 @@ class FeedbackTable {
         $table_name = $wpdb->prefix . 'insight_suite_feedback';
         //charset = character set (like utf8mb4) this part controls what characters can be stored and 
         //collate stands for collation like how those characters are compared and sorted e.g if a = A
-        //utf8mbr is a character set of mysql and it can store any univode character (emojis,letters,digits) 
+        //utf8mb4 is a character set of mysql and it can store any univode character (emojis,letters,digits) 
         $charset_collate = $wpdb->get_charset_collate();
 
         require_once ABSPATH . 'wp-admin/includes/upgrade.php';
@@ -27,6 +30,7 @@ class FeedbackTable {
         feedback_message text NOT NULL,
         type text NOT NULL,
         PRIMARY KEY (id)
+        
         )$charset_collate ";
 
         dbDelta($sql);  
