@@ -2,6 +2,8 @@
 
 namespace HafeeImran\WPInsightSuite\Rest;
 
+defined('ABSPATH') || exit;
+
 use HafeeImran\WPInsightSuite\Database\FeedbackRepository;
 use WP_Error;
 use WP_REST_Request;
@@ -27,22 +29,25 @@ class FeedbackEndpoint
             '/feedback',
             array(
                 'methods' => 'POST',
-                'callback' => [$this, 'handleFeedbackSubmission'],
-                'permission_callback' => [$this, 'feedbackPermissionCheck'],
+                'callback' => [$this, 'handle_feedback_submission'],
+                'permission_callback' => [$this, 'feedback_permission_check'],
             ),
+            true
         );
     }
 
-    public function feedbackPermissionCheck(WP_REST_Request $request)
+    public function feedback_permission_check(WP_REST_Request $request)
     {
         $nonce = $request->get_header('X-WP-Nonce');
-        if (wp_verify_nonce($nonce, 'insight_suite')) {
+        if (wp_verify_nonce($nonce, 'wp_rest')) {
             return true;
         }
         return new WP_Error('invalid_nonce', 'Invalid Nonce', array('status' => 403));
+
+
     }
 
-    public function handleFeedbackSubmission(WP_REST_Request $request)
+    public function handle_feedback_submission(WP_REST_Request $request)
     {
 
         $data = $request->get_json_params();
@@ -77,7 +82,7 @@ class FeedbackEndpoint
 
         $repository =  new FeedbackRepository();
 
-        $result = $repository->insertFeedback($name, $email, $feedback, $type);
+        $result = $repository->insert_feedback($name, $email, $feedback, $type);
 
         if ($result['success'] === false) {
             return new WP_Error(
@@ -87,12 +92,12 @@ class FeedbackEndpoint
             );
         }
 
-
         return new WP_REST_Response([
             'success' => $result['success'],
             'message' => 'Feedback received successfully.',
             'feedback_id' => $result['insert_id'],
         ],201);
+
     }
 
 }

@@ -37,7 +37,7 @@ class Assets {
             'wpis_frontend_js',
             'myPluginData',
             array(
-                'nonce' => wp_create_nonce('insight_suite'),
+                'nonce' => wp_create_nonce('wp_rest'),
                 'restUrl' => rest_url('insight-suite/v1/feedback'),
             )
         );

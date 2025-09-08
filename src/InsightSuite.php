@@ -17,7 +17,6 @@ class InsightSuite {
         new FeedbackFormShortcode();
         new Assets();
         new FeedbackEndpoint();
-
     }
 
 

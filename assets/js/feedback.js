@@ -33,7 +33,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const userEmail = inputEmail.value;
         const userFeedback = inputFeedback.value;
         const userRating = selectedRating;
-
+        console.log(myPluginData.restUrl);
+        console.log(myPluginData.nonce);
         fetch(myPluginData.restUrl, {
             method: 'POST',
             headers: {

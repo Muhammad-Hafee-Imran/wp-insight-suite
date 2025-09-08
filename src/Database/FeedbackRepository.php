@@ -17,7 +17,7 @@ class FeedbackRepository
         $this->table = $this->wpdb->prefix . 'insight_suite_feedback';
     }
 
-    public function insertFeedback($name, $email, $feedback_message, $type)
+    public function insert_feedback($name, $email, $feedback_message, $type)
     {
 
         $result = $this->wpdb->insert(
