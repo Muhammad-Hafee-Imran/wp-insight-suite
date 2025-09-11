@@ -1,0 +1,25 @@
+{
+  "name": "wp-insight-suite",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "devDependencies": {
+    "@wordpress/scripts": "^27.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "wp-scripts start",
+    "build": "wp-scripts build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Muhammad-Hafee-Imran/wp-insight-suite.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Muhammad-Hafee-Imran/wp-insight-suite/issues"
+  },
+  "homepage": "https://github.com/Muhammad-Hafee-Imran/wp-insight-suite#readme"
+}

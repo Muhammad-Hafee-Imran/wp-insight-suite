@@ -24,7 +24,7 @@ class FeedbackFormShortcode {
         //The class scope resolution self:: is used beacuse we are using the class constant static variable declared in this class. self ensures we reference this class's constant.
         add_shortcode( self::SHORTCODE, [$this, 'render'] );
     }
-
+    
     public function render( $atts = [], $content = null, $tag = '' ) {
         
         //WordPress requires shortcode callback functions to accept 3 parameters ($atts, $content, $tag) for flexibility.

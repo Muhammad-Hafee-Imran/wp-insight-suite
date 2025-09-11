@@ -6,7 +6,8 @@
         "psr-4": {
             "HafeeImran\\WPInsightSuite\\": "src/",
             "HafeeImran\\WPInsightSuite\\Rest\\": "src/Rest/",
-            "HafeeImran\\WPInsightSuite\\Database\\": "src/Database/"
+            "HafeeImran\\WPInsightSuite\\Database\\": "src/Database/",
+            "HafeeImran\\WPInsightSuite\\Admin\\": "src/Admin/"
         }
     },
     "authors": [

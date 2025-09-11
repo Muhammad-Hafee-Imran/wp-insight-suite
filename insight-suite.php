@@ -7,10 +7,11 @@
  * Text Domain: wp-insight-suite
  */
 
+defined('ABSPATH') || exit;
+
 use HafeeImran\WPInsightSuite\Database\FeedbackTable;
 use HafeeImran\WPInsightSuite\InsightSuite;
-
-defined('ABSPATH') || exit;
+use HafeeImran\WPInsightSuite\Admin\AdminInsightSuite;
 
 define('WPIS_VERSION','0.1.0');//See its purpose and benefits.
 define('WPIS_PATH', plugin_dir_path(__FILE__));
@@ -26,5 +27,9 @@ register_activation_hook(__FILE__, function() {
     new FeedbackTable();
 });
 
+
+add_action('plugins_loaded', function() {
+    new AdminInsightSuite();
+});
 
 
